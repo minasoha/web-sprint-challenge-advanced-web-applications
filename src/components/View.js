@@ -19,9 +19,28 @@ const View = (props) => {
     };
     getArticles();
   }, []);
-  const handleDelete = (id) => {};
+  const handleDelete = (id) => {
+    axiosWithAuth()
+      .delete(`http://localhost:5000/api/articles/${id}`)
+      .then((resp) => {
+        setArticles(resp.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 
-  const handleEdit = (article) => {};
+  const handleEdit = (article) => {
+    axiosWithAuth()
+      .put(`http://localhost:5000/api/articles/${editId}`, article)
+      .then((resp) => {
+        setEditing(false);
+        setArticles(resp.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 
   const handleEditSelect = (id) => {
     setEditing(true);
