@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import axios from "axios";
+import axiosWithAuth from "./../utils/axiosWithAuth";
 
-// Initial Form Data
 const initialValues = {
   username: "",
   password: "",
@@ -27,7 +26,7 @@ const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    axios
+    axiosWithAuth()
       .post("http://localhost:5000/api/login", values)
       .then((response) => {
         localStorage.setItem("token", response.data.token);
