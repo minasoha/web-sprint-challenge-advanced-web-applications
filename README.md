@@ -49,20 +49,20 @@ In this project, you will demonstrate your mastery of these skills by creating *
 
 ### Route Authentication
 
-- [ ] Build a `PrivateRoute` component within the components folder.
-- [ ] Use the `PrivateRoute` component to build a route rendering `View.js` to the path `/view`.
-- [ ] Use the `PrivateRoute` component to build a route rendering `Logout.js` to the path `/logout`.
+- [x] Build a `PrivateRoute` component within the components folder.
+- [x] Use the `PrivateRoute` component to build a route rendering `View.js` to the path `/view`.
+- [x] Use the `PrivateRoute` component to build a route rendering `Logout.js` to the path `/logout`.
 
 ### Request Authentication
 
 > _Complete the requests needed to execute all CRUD functions._
 
-- [ ] Build a `axiosWithAuth` module within the utils folder to create an instance of axios with the authentication header.
-- [ ] Complete the `services/articleService.js` module. It should use make an authenticated call to retrieve and return all articles from the server.
+- [x] Build a `axiosWithAuth` module within the utils folder to create an instance of axios with the authentication header.
+- [x] Complete the `services/articleService.js` module. It should use make an authenticated call to retrieve and return all articles from the server.
 
-- [ ] In `View.js`, when the component mounts, use `articleService` to make an http request and add all articles to state.
+- [x] In `View.js`, when the component mounts, use `articleService` to make an http request and add all articles to state.
 
-- [ ] In `View.js`, complete `handleDelete` so that a http request is made that deletes the article with the included id. After successfully deleting the article on the api, update local state to reflect these changes.
+- [x] In `View.js`, complete `handleDelete` so that a http request is made that deletes the article with the included id. After successfully deleting the article on the api, update local state to reflect these changes.
 
 - [ ] `editId` is passed into the `EditForm` component. In `EditForm.js`, make a http request on mount to get the article with the id `editId`. Save the result in state.
 
