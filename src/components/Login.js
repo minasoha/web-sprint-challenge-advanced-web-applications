@@ -1,24 +1,76 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
+import axios from "axios";
+
+// Initial Form Data
+const initialValues = {
+  username: "",
+  password: "",
+};
+const initialErrors = {
+  errorMessage: "",
+};
 
 const Login = () => {
-  const [error, setError] = useState();
+  const { push } = useHistory();
+
+  const [values, setValues] = useState(initialValues);
+  const [errors, setErrors] = useState(initialErrors);
+
+  const handleChange = (event) => {
+    setValues({
+      ...values,
+      [event.target.name]: event.target.value,
+    });
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    axios
+      .post("http://localhost:5000/api/login", values)
+      .then((response) => {
+        localStorage.setItem("token", response.data.token);
+        setErrors({ errorMessage: "" });
+        push("/view");
+      })
+      .catch((error) => {
+        console.error("FAILED TO LOG IN!", error);
+        setErrors({ ...errors, errorMessage: "Incorrect Login/Password" });
+      });
+  };
+
   return (
     <ComponentContainer>
       <ModalContainer>
         <h1>Welcome to Blogger Pro</h1>
         <h2>Please enter your account information.</h2>
-        <FormGroup>
+
+        <p id="error">{errors.errorMessage}</p>
+
+        <FormGroup onSubmit={handleSubmit}>
           <Label>
-            Username:
-            <Input type="text" id="username" />
+            Username
+            <Input
+              id="username"
+              name="username"
+              type="text"
+              value={values.username}
+              onChange={handleChange}
+            />
           </Label>
           <Label>
-            Password:
-            <Input type="password" id="password" />
+            Password
+            <Input
+              id="password"
+              name="password"
+              type="password"
+              value={values.password}
+              onChange={handleChange}
+            />
           </Label>
+          <Button id="submit">Log In</Button>
         </FormGroup>
-        <p id="error"></p>
       </ModalContainer>
     </ComponentContainer>
   );
